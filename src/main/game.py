@@ -4,10 +4,14 @@ from player import Player
 
 def game_loop():
     screen = pygame.display.set_mode((800, 400))
+    screen.fill((50, 50, 50))
     all_sprites = pygame.sprite.Group()
     player = Player()
     all_sprites.add(player)
+    screen.blit(player.surf, (0, 0))
     while True:
+        frame = 0
+        screen.blit(player.get_image(0, 60, 70, 1), (player.pos_x, player.pos_y))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -16,16 +20,20 @@ def game_loop():
             if pygame.key.get_pressed()[pygame.K_w]:
                 print("w was pressed")
                 player.pos_y -= 1
+                frame = 1
             if pygame.key.get_pressed()[pygame.K_s]:
                 print("s was pressed")
                 player.pos_y += 1
+                frame = 1
             if pygame.key.get_pressed()[pygame.K_a]:
                 print("a was pressed")
                 player.pos_x -= 1
+                frame = 1
             if pygame.key.get_pressed()[pygame.K_d]:
                 print("d was pressed")
                 player.pos_x += 1
-        screen.blit(player.surf, (player.pos_x, player.pos_y))
+                frame = 1
+            screen.blit(player.get_image(frame, 60, 70, 1), (player.pos_x, player.pos_y))
         pygame.display.update()
 
 
