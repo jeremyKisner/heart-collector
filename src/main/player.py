@@ -5,25 +5,18 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self):
         super().__init__()
-        self.current_health = 100
+        self.current_health = 10
+        self.max_health = 100
+        self.health_bar = 400
         pygame.sprite.Sprite.__init__(self)
-        self.sprite_sheet_image = self.__load_sprite_sheet()
-        self.get_image(0, 60, 70, 1)
+        self.main_image = self.__load_main_image()
         self.pos_x = 0
-        self.pos_y = 0
+        self.pos_y = 200
+        self.speed = 2
 
 
-    def __load_sprite_sheet(self):
-        return pygame.image.load("./src/main/assets/Hero.png").convert_alpha()
-
-
-    def get_image(self, frame, width, height, scale):
-        image = pygame.Surface((width, height)).convert_alpha()
-        image.blit(self.sprite_sheet_image, (0, 0), ((frame * width), 0, width, height))
-        image = pygame.transform.scale(image, (width * scale, height * scale))
-        image.set_colorkey((0,0,0))
-        self.surf = image
-        return image
+    def __load_main_image(self):
+        return pygame.image.load("./src/main/assets/HeroMain.png").convert_alpha()
 
 
     def get_current_health(self) -> int:
@@ -35,3 +28,7 @@ class Player(pygame.sprite.Sprite):
             self.current_health += incoming_health
             if self.current_health < 0:
                 self.current_health = 0
+
+
+    def get_health_ratio(self):
+        return self.max_health / self.health_bar

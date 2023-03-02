@@ -1,8 +1,11 @@
 import unittest
 import src.main.player as t
+import pygame
 
 class TestPlayer(unittest.TestCase):
 
+    pygame.init()
+    screen = pygame.display.set_mode((800, 400))
 
     def test_player_initialize(self):
         p = t.Player()

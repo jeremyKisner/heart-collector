@@ -3,37 +3,31 @@ from player import Player
 
 
 def game_loop():
+    clock = pygame.time.Clock()
     screen = pygame.display.set_mode((800, 400))
-    screen.fill((50, 50, 50))
     all_sprites = pygame.sprite.Group()
     player = Player()
     all_sprites.add(player)
-    screen.blit(player.surf, (0, 0))
     while True:
-        frame = 0
-        screen.blit(player.get_image(0, 60, 70, 1), (player.pos_x, player.pos_y))
+        screen.fill((50, 50, 50))
+        screen.blit(player.main_image, (player.pos_x, player.pos_y))
+        pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
+        pygame.draw.rect(screen, (255,255,255), (10, 10, player.health_bar, 25), 4)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if pygame.key.get_pressed()[pygame.K_ESCAPE]:
                 pygame.quit()
             if pygame.key.get_pressed()[pygame.K_w]:
-                print("w was pressed")
-                player.pos_y -= 1
-                frame = 1
+                player.pos_y -= player.speed
             if pygame.key.get_pressed()[pygame.K_s]:
-                print("s was pressed")
-                player.pos_y += 1
-                frame = 1
+                player.pos_y += player.speed
             if pygame.key.get_pressed()[pygame.K_a]:
-                print("a was pressed")
-                player.pos_x -= 1
-                frame = 1
+                player.pos_x -= player.speed
             if pygame.key.get_pressed()[pygame.K_d]:
-                print("d was pressed")
-                player.pos_x += 1
-                frame = 1
-            screen.blit(player.get_image(frame, 60, 70, 1), (player.pos_x, player.pos_y))
+                player.pos_x += player.speed
+            screen.blit(player.main_image, (player.pos_x, player.pos_y))
+        clock.tick(60)
         pygame.display.update()
 
 
