@@ -1,5 +1,6 @@
 import pygame
 from player import Player
+from components.heart import Heart
 
 
 def game_loop():
@@ -8,9 +9,13 @@ def game_loop():
     all_sprites = pygame.sprite.Group()
     player = Player()
     all_sprites.add(player)
+    hearts = pygame.sprite.Group()
+    heart = Heart()
+    hearts.add(heart)
     while True:
         screen.fill((50, 50, 50))
         screen.blit(player.main_image, (player.pos_x, player.pos_y))
+        heart.render(screen, 250, 250)
         pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
         pygame.draw.rect(screen, (255,255,255), (10, 10, player.health_bar, 25), 4)
         for event in pygame.event.get():
@@ -28,7 +33,7 @@ def game_loop():
                 player.pos_x += player.speed
             screen.blit(player.main_image, (player.pos_x, player.pos_y))
         clock.tick(60)
-        pygame.display.update()
+        pygame.display.flip()
 
 
 def is_game_initialized():

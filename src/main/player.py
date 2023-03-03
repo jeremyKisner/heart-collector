@@ -10,9 +10,10 @@ class Player(pygame.sprite.Sprite):
         self.health_bar = 400
         pygame.sprite.Sprite.__init__(self)
         self.main_image = self.__load_main_image()
+        self.rect = self.main_image.get_rect()
         self.pos_x = 0
         self.pos_y = 200
-        self.speed = 2
+        self.speed = 3
 
 
     def __load_main_image(self):
