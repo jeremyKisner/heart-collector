@@ -10,8 +10,10 @@ def game_loop():
     player = Player()
     all_sprites.add(player)
     hearts = pygame.sprite.Group()
-    heart = Heart()
+    heart = Heart(250, 250)
     hearts.add(heart)
+    heart3 = Heart(100, 100)
+    hearts.add(heart3)
     while True:
         screen.fill((50, 50, 50))
         pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
@@ -24,8 +26,8 @@ def game_loop():
         player.handle_keys()
         player.draw(screen)
         for s in hearts:
-            s.draw(screen, 250, 250)
-            if pygame.sprite.spritecollideany(player, hearts):
+            s.draw(screen)
+            if pygame.sprite.collide_rect(player, s):
                 hearts.remove(s)
                 player.set_current_health(s.hp)
         pygame.display.update()
