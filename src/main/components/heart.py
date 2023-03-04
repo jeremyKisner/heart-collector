@@ -17,6 +17,7 @@ class Heart(pygame.sprite.Sprite):
 
 
     def render(self, screen, x_pos, y_pos):
+        self.rect.move_ip(x_pos, y_pos)
         screen.blit(self.main_image, (x_pos, y_pos))
 
 

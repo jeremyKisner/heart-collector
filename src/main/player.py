@@ -8,16 +8,32 @@ class Player(pygame.sprite.Sprite):
         self.current_health = 10
         self.max_health = 100
         self.health_bar = 400
+        self.pos_x = 0
+        self.pos_y = 200
+        self.speed = 2
         pygame.sprite.Sprite.__init__(self)
         self.main_image = self.__load_main_image()
         self.rect = self.main_image.get_rect()
-        self.pos_x = 0
-        self.pos_y = 200
-        self.speed = 3
 
 
     def __load_main_image(self):
         return pygame.image.load("./src/main/assets/HeroMain.png").convert_alpha()
+
+
+    def handle_keys(self):
+        key = pygame.key.get_pressed()
+        if key[pygame.K_w]:
+            self.pos_y -= self.speed
+        if key[pygame.K_s]:
+            self.pos_y += self.speed
+        if key[pygame.K_a]:
+            self.pos_x -= self.speed
+        if key[pygame.K_d]:
+            self.pos_x += self.speed
+
+
+    def draw(self, screen):
+        screen.blit(self.main_image, (self.pos_x, self.pos_y))
 
 
     def get_current_health(self) -> int:

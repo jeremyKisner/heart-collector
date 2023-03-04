@@ -14,7 +14,6 @@ def game_loop():
     hearts.add(heart)
     while True:
         screen.fill((50, 50, 50))
-        screen.blit(player.main_image, (player.pos_x, player.pos_y))
         heart.render(screen, 250, 250)
         pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
         pygame.draw.rect(screen, (255,255,255), (10, 10, player.health_bar, 25), 4)
@@ -23,17 +22,10 @@ def game_loop():
                 pygame.quit()
             if pygame.key.get_pressed()[pygame.K_ESCAPE]:
                 pygame.quit()
-            if pygame.key.get_pressed()[pygame.K_w]:
-                player.pos_y -= player.speed
-            if pygame.key.get_pressed()[pygame.K_s]:
-                player.pos_y += player.speed
-            if pygame.key.get_pressed()[pygame.K_a]:
-                player.pos_x -= player.speed
-            if pygame.key.get_pressed()[pygame.K_d]:
-                player.pos_x += player.speed
-            screen.blit(player.main_image, (player.pos_x, player.pos_y))
+        player.handle_keys()
+        player.draw(screen)
+        pygame.display.update()
         clock.tick(60)
-        pygame.display.flip()
 
 
 def is_game_initialized():
