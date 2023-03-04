@@ -12,8 +12,8 @@ def game_loop():
     hearts = pygame.sprite.Group()
     heart = Heart(250, 250)
     hearts.add(heart)
-    heart3 = Heart(100, 100)
-    hearts.add(heart3)
+    heart = Heart(100, 100)
+    hearts.add(heart)
     while True:
         screen.fill((50, 50, 50))
         pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
