@@ -6,8 +6,10 @@ class Heart(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         pygame.sprite.Sprite.__init__(self)
+        self.type = "heart"
         self.image = self.__load_main_image()
         self.get_image_dimensions()
+        self.hp = 10
 
 
     def __load_main_image(self):
@@ -21,10 +23,6 @@ class Heart(pygame.sprite.Sprite):
         self.height = self.image.get_height()
 
 
-    def render(self, screen, x_pos, y_pos):
+    def draw(self, screen, x_pos, y_pos):
         screen.blit(self.image, (x_pos, y_pos))
         self.rect = pygame.Rect(x_pos, y_pos, self.width, self.height)
-
-
-    def consume(self):
-        self.kill()
