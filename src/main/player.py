@@ -12,8 +12,9 @@ class Player(pygame.sprite.Sprite):
         self.pos_y = 200
         self.speed = 2
         pygame.sprite.Sprite.__init__(self)
-        self.main_image = self.__load_main_image()
-        self.rect = self.main_image.get_rect()
+        self.image = self.__load_main_image()
+        self.get_image_dimensions()
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
 
 
     def __load_main_image(self):
@@ -32,8 +33,14 @@ class Player(pygame.sprite.Sprite):
             self.pos_x += self.speed
 
 
+    def get_image_dimensions(self):
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
+
+
     def draw(self, screen):
-        screen.blit(self.main_image, (self.pos_x, self.pos_y))
+        screen.blit(self.image, (self.pos_x, self.pos_y))
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
 
 
     def get_current_health(self) -> int:

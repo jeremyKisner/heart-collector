@@ -24,6 +24,9 @@ def game_loop():
                 pygame.quit()
         player.handle_keys()
         player.draw(screen)
+        if player.rect.colliderect(heart):
+            print("here")
+            heart.consume()
         pygame.display.update()
         clock.tick(60)
 
