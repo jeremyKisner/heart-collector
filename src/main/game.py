@@ -9,11 +9,11 @@ def game_loop():
     all_sprites = pygame.sprite.Group()
     player = Player()
     all_sprites.add(player)
-    hearts = pygame.sprite.Group()
+    power_ups = pygame.sprite.Group()
     heart = Heart(250, 250)
-    hearts.add(heart)
+    power_ups.add(heart)
     heart = Heart(100, 100)
-    hearts.add(heart)
+    power_ups.add(heart)
     while True:
         screen.fill((50, 50, 50))
         pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
@@ -25,10 +25,10 @@ def game_loop():
                 pygame.quit()
         player.handle_keys()
         player.draw(screen)
-        for s in hearts:
+        for s in power_ups:
             s.draw(screen)
             if pygame.sprite.collide_rect(player, s):
-                hearts.remove(s)
+                power_ups.remove(s)
                 player.set_current_health(s.hp)
         pygame.display.update()
         clock.tick(60)

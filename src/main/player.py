@@ -14,12 +14,17 @@ class Player(pygame.sprite.Sprite):
         self.pos_y = 200
         self.speed = 2
         self.image = self.__load_main_image()
-        self.get_image_dimensions()
+        self.__get_image_dimensions()
         self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
 
 
     def __load_main_image(self):
         return pygame.image.load("./src/main/assets/HeroMain.png").convert_alpha()
+
+
+    def __get_image_dimensions(self):
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
 
 
     def handle_keys(self):
@@ -32,11 +37,6 @@ class Player(pygame.sprite.Sprite):
             self.pos_x -= self.speed
         if key[pygame.K_d]:
             self.pos_x += self.speed
-
-
-    def get_image_dimensions(self):
-        self.width = self.image.get_width()
-        self.height = self.image.get_height()
 
 
     def draw(self, screen):
@@ -53,8 +53,8 @@ class Player(pygame.sprite.Sprite):
             self.current_health += incoming_health
             if self.current_health <= 0:
                 self.current_health = 0
-            elif self.current_health >= self.health_bar:
-                self.current_health = self.health_bar
+            elif self.current_health >= self.max_health:
+                self.current_health = self.max_health
 
 
     def get_health_ratio(self):
