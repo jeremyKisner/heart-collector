@@ -14,6 +14,8 @@ def game_loop():
     power_ups.add(heart)
     heart = Heart(100, 100)
     power_ups.add(heart)
+    pygame.display.set_caption("Tribute (The Game)")
+    game_score = pygame.font.SysFont("monospace", 16)
     while True:
         clock.tick(60)/1000
         screen.fill((50, 50, 50))
@@ -31,6 +33,8 @@ def game_loop():
             if pygame.sprite.collide_rect(player, s) and not player.is_health_full():
                 power_ups.remove(s)
                 player.set_current_health(s.hp)
+                player.set_score(1)
+        screen.blit(game_score.render(f"Score {player.get_score()}", 1, (255,255,255)), (600, 10))
         pygame.display.update()
 
 

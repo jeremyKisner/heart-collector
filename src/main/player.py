@@ -13,6 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.pos_x = 0
         self.pos_y = 200
         self.speed = 2
+        self.score = 0
         self.image = self.__load_main_image()
         self.__get_image_dimensions()
         self.rect = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
@@ -66,3 +67,13 @@ class Player(pygame.sprite.Sprite):
         if self.current_health == self.max_health:
             self.full_health = True
         return self.full_health
+
+
+    def get_score(self):
+        return self.score
+
+
+    def set_score(self, incoming_score):
+        self.score += incoming_score
+        if self.score < 0 :
+            self.score = 0
