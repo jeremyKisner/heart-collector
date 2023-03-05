@@ -15,6 +15,7 @@ def game_loop():
     heart = Heart(100, 100)
     power_ups.add(heart)
     while True:
+        clock.tick(60)/1000
         screen.fill((50, 50, 50))
         pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
         pygame.draw.rect(screen, (255,255,255), (10, 10, player.health_bar, 25), 4)
@@ -31,7 +32,6 @@ def game_loop():
                 power_ups.remove(s)
                 player.set_current_health(s.hp)
         pygame.display.update()
-        clock.tick(60)
 
 
 def is_game_initialized():

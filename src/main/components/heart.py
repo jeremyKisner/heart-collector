@@ -8,7 +8,7 @@ class Heart(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.type = "heart"
         self.image = self.__load_main_image()
-        self.get_image_dimensions()
+        self.__get_image_dimensions()
         self.hp = 10
         self.pos_x = pos_x
         self.pos_y = pos_y
@@ -21,7 +21,7 @@ class Heart(pygame.sprite.Sprite):
         return image
 
 
-    def get_image_dimensions(self):
+    def __get_image_dimensions(self):
         self.width = self.image.get_width()
         self.height = self.image.get_height()
 
