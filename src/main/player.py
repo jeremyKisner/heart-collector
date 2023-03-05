@@ -59,3 +59,10 @@ class Player(pygame.sprite.Sprite):
 
     def get_health_ratio(self):
         return self.max_health / self.health_bar
+
+
+    def is_health_full(self):
+        self.full_health = False
+        if self.current_health == self.max_health:
+            self.full_health = True
+        return self.full_health

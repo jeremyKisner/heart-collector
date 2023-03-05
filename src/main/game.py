@@ -28,7 +28,7 @@ def game_loop():
         player.draw(screen)
         for s in power_ups:
             s.draw(screen)
-            if pygame.sprite.collide_rect(player, s):
+            if pygame.sprite.collide_rect(player, s) and not player.is_health_full():
                 power_ups.remove(s)
                 player.set_current_health(s.hp)
         pygame.display.update()

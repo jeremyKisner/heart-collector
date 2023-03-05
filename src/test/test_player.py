@@ -33,3 +33,11 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(temp_current_health - 1, p.get_current_health())
         p.set_current_health(-100000)
         self.assertEqual(0, p.get_current_health())
+
+
+    def test_is_health_full(self):
+        p = t.Player()
+        p.set_current_health(10000)
+        self.assertEqual(p.is_health_full(), True)
+        p.set_current_health(-100000)
+        self.assertEqual(p.is_health_full(), False)
