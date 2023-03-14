@@ -4,6 +4,7 @@ from components.heart import Heart
 
 
 def game_loop():
+    game_won = False
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((800, 400))
     all_sprites = pygame.sprite.Group()
@@ -16,7 +17,7 @@ def game_loop():
     power_ups.add(heart)
     pygame.display.set_caption("Tribute (The Game)")
     game_score = pygame.font.SysFont("monospace", 16)
-    while True:
+    while not game_won:
         clock.tick(60)/1000
         screen.fill((50, 50, 50))
         pygame.draw.rect(screen, (255,0,0), (10, 10, player.current_health / player.get_health_ratio(), 25))
@@ -36,6 +37,19 @@ def game_loop():
                 player.set_score(1)
         screen.blit(game_score.render(f"Score {player.get_score()}", 1, (255,255,255)), (600, 10))
         pygame.display.update()
+        if len(power_ups) == 0:
+            game_won = True
+        
+    if game_won:
+        screen.blit(game_score.render("YOU WIN", 1, (255,255,255)), (250, 250))
+        pygame.display.update()
+        done = False
+        while not done:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                if pygame.key.get_pressed()[pygame.K_ESCAPE]:
+                    pygame.quit()
 
 
 def is_game_initialized():
